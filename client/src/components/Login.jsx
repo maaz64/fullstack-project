@@ -32,7 +32,7 @@ const Login = () => {
         console.log("Terms and condition accepted" + terms)
         if(terms === false){
             navigate('/login');
-            toast.success("Accept Terms and Conditions")
+            toast.error("Accept Terms and Conditions")
             return;
         }
         try {
