@@ -14,7 +14,7 @@ const Login = () => {
         password: '',
       });
     
-      const {auth,setAuth} = useAuth();
+      const {setAuth} = useAuth();
       const navigate = useNavigate();
       const [terms, setTerms] = useState(false);
      
@@ -29,23 +29,19 @@ const Login = () => {
     
       const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Terms and condition accepted" + terms)
         if(terms === false){
             navigate('/login');
             toast.error("Accept Terms and Conditions")
             return;
         }
         try {
-          const res = await axiosInstance.post('/sign-in', formData);
+          const res = await axiosInstance.post('/signin', formData);
           const accessToken = res?.data?.data?.accessToken;
           const refreshToken = res?.data?.data?.refreshToken;
           const userId = res?.data?.data?.userId;
           const name = res?.data?.data?.name;
-          console.log(`accessToken:${accessToken} refreshToken:${refreshToken} userId: ${userId} name:${name}`)
-          console.log("res in signin page",res);
           setAuth({ userId, name, refreshToken, accessToken});
           clearInput();
-      
           navigate('/posts');
           toast.success(res.data.message)
     
@@ -116,18 +112,12 @@ const Login = () => {
                         />
                         <span>Terms and Condition</span>
                     </label>
-                    {/* <Link
-                        to='/'
-                        className="text-blue-400 hover:text-blue-700 hover:underline hover:underline-offset-4"
-                    >
-                        Forgot Password?
-                    </Link> */}
                 </div>
                 <div className="text-center md:text-left">
                     <button
                         onClick={handleSubmit}
-                        className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
                         type="submit"
+                        className="mt-4 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600"
                     >
                         Login
                     </button>

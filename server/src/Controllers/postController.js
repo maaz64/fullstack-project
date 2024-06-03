@@ -5,7 +5,8 @@ const { ApiResponse } = require("../Utils/ApiResponse");
 const createPost = async (req, res,next) => {
   try {
     const { content, title } = req.body;
-    const { userId } = req.query;
+    const userId  = req.user._id;
+    console.log(userId);
 
     if (!content || !title ) {
       return next(new ApiError(400, "All fields are required"));
@@ -32,7 +33,7 @@ const createPost = async (req, res,next) => {
 
 const getAllPost = async (_, res, next) => {
   try {
-    const posts = await Post.find({}).populate('user', 'fullName');
+    const posts = await Post.find({}).sort({createdAt: -1 }).populate('user', 'fullName');
     if (!posts) {
       return next(new ApiError(502, "Post not fetched from database due to some reason"));
     }

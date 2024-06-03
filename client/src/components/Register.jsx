@@ -28,7 +28,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const res = await axiosInstance.post('/sign-up', formData);
+      await axiosInstance.post('/signup', formData);
       navigate('/login');
       clearInput();
       toast.success("Registration Successfull");
@@ -83,15 +83,15 @@ const Register = () => {
           className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded"
           type="text"
           name='fullName'
-          value={formData.username}
+          value={formData.fullName}
           onChange={handleChange}
-          placeholder="Username"
+          placeholder="Full Name"
         />
         <input
-          className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded"
+          className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
           type="text"
           name='username'
-          value={formData.fullName}
+          value={formData.username}
           onChange={handleChange}
           placeholder="Username"
         />
@@ -121,10 +121,10 @@ const Register = () => {
         />
         <div className="text-center md:text-left ">
           <button onClick={handleSubmit}
-            className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
             type="submit"
+            className="mt-4 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600"
           >
-            SignUp
+            Sign up
           </button>
         </div>
         <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
